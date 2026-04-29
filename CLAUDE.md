@@ -16,6 +16,9 @@ This is a **career mentorship AI assistant knowledge base** written entirely in 
 | `Service_C.md` | Step-by-step flow for Service C (resume–job match analysis + interview prep) |
 | `Service_Interview.md` | 4-stage interview methodology (STAR framework) used by Service B |
 | `Avoid_Risk.md` | Taiwan workplace red-flag guide used by Service C for toxic-company detection |
+| `Resume_Template.md` | 8-block resume format specification — governs output structure for Services A and B |
+| `Special_Cases.md` | Non-standard career situation handlers — employment gaps, atypical work, freelancers, etc. |
+| `Few_Shot_Examples.md` | Output examples for all three services — reference for AI response structure and tone |
 
 ## System Behaviour (from `instructions.md`)
 

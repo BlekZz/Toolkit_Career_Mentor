@@ -39,20 +39,15 @@ description: 職涯履歷導師 — 提供三項求職履歷服務：A.履歷檢
 4. 進入對應服務流程，嚴格遵守 instructions.md 的五條規則
 5. 所有對話以繁體中文進行，每個步驟需使用者明確確認後方可推進
 
-## 安裝說明
+## 部署說明
 
-```bash
-# 1. 建立技能目錄
-mkdir -p ~/.claude/skills/career-mentor/references
+本套件支援三種部署方式：
 
-# 2. 複製技能文件
-cp SKILL.md ~/.claude/skills/career-mentor/
-cp references/*.md ~/.claude/skills/career-mentor/references/
-```
+- **Claude Code CLI**：安裝至 `~/.claude/skills/career-mentor/`，使用 `/career-mentor` 指令呼叫
+- **Claude.ai Project（多文件）**：將 `references/instructions.md` 貼入 Project Instructions，其餘 8 個文件上傳至 Project Knowledge
+- **Claude.ai 快速貼上（單一文件）**：使用 `career-mentor-v1.skill` 合併文件，直接貼入 Project Instructions 或對話
 
-安裝完成後，Claude Code 重新啟動時會自動偵測新技能。
-
-詳細安裝步驟請參閱同目錄的 `Claude_Code_Skill_README.md`。
+詳見同目錄的 `Claude_Web_Skill_README.md`。
 
 ## 文件版本
 
