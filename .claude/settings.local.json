@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"Project materials\" \"Claude Web Skill\" \"Gemini Gem\" \"Claude Code Skill\")",
+      "Bash(mv instructions.md Service_A.md Service_B.md Service_C.md Service_Interview.md Avoid_Risk.md \"Project materials/\")",
+      "Read(//c/c/Users/lolz_/Desktop/**)",
+      "Bash(git commit -m ' *)",
+      "Read(//c/Users/lolz_/.claude/skills/**)",
+      "Read(//c/Users/lolz_/.claude/skills/graphify/**)",
+      "Bash(git add *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git -C \"/c/Users/lolz_/Desktop/career-mentor\" status)",
+      "Bash(git -C \"/c/Users/lolz_/Desktop/career-mentor\" log --oneline -3)",
+      "Bash(git -C /c/Users/lolz_/Desktop/career-mentor add CLAUDE.md Draft_Plan.md 'web skill creator.md' 'Project materials/Service_C.md' 'Project materials/instructions.md' 'Claude Code Skill/SKILL.md' 'Claude Code Skill/Claude_Code_Skill_README.md' 'Claude Code Skill/references/' 'Claude Web Skill/SKILL.md' 'Claude Web Skill/Claude_Web_Skill_README.md' 'Claude Web Skill/references/' 'Claude Web Skill/career-mentor-v1.skill' 'Gemini Gem/Gemini_Gem_README.md' 'Gemini Gem/UPLOAD_GUIDE.md' 'Gemini Gem/instructions.md' 'Gemini Gem/Service_C.md')",
+      "Bash(git -C \"/c/Users/lolz_/Desktop/career-mentor\" status --short)",
+      "Bash(git *)"
+    ]
+  }
+}
