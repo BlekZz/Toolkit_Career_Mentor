@@ -1,6 +1,6 @@
 # 職涯履歷導師 — Claude Code Skill 部署指南
 
-版本：v1.1 | 日期：2026-04-29
+版本：v1.2 | 日期：2026-05-14
 
 ## 套件概述
 
@@ -14,10 +14,10 @@
 
 ```
 Claude Code Skill/
-├── Claude_Code_Skill_README.md  ← 本說明文件（不需複製至技能目錄）
 ├── SKILL.md                     ← 技能路由入口（必要）
 └── references/                  ← 知識庫文件（必要）
     ├── instructions.md          ← 角色定義、全域規則、路由邏輯
+    ├── Glossary.md              ← 全系統術語規範
     ├── Service_A.md             ← 服務 A 步驟
     ├── Service_B.md             ← 服務 B 步驟
     ├── Service_C.md             ← 服務 C 步驟
@@ -55,6 +55,7 @@ cp references/*.md ~/.claude/skills/career-mentor/references/
 ├── SKILL.md
 └── references/
     ├── instructions.md
+    ├── Glossary.md
     ├── Service_A.md
     ├── Service_B.md
     ├── Service_C.md
@@ -87,7 +88,6 @@ cp references/*.md ~/.claude/skills/career-mentor/references/
 
 ## 注意事項
 
-- `Claude_Code_Skill_README.md` 為說明文件，**不需**複製至技能目錄
 - 所有對話均以繁體中文進行
 - 技能路由由 `SKILL.md` 入口控制，知識庫統一位於 `references/` 子目錄
 - 安裝完成後，Claude Code 重新啟動時會自動偵測新技能

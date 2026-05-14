@@ -1,6 +1,6 @@
 # 職涯履歷導師 — Claude Web Skill 部署指南
 
-版本：v1.1 | 日期：2026-04-29
+版本：v1.2 | 日期：2026-05-14
 
 ## 套件概述
 
@@ -13,11 +13,11 @@
 
 ```
 Claude Web Skill/
-├── Claude_Web_Skill_README.md   ← 本說明文件（部署指南）
 ├── SKILL.md                     ← 多文件技能路由入口（Claude Code CLI 安裝用）
 ├── career-mentor-v1.skill       ← 合併版單一文件（Claude.ai 快速貼上用）
 └── references/                  ← 知識庫文件（可直接從此資料夾選取上傳）
     ├── instructions.md          ← System Prompt — 角色、規則、路由
+    ├── Glossary.md              ← 全系統術語規範
     ├── Service_A.md             ← 服務 A：履歷檢視與優化生成
     ├── Service_B.md             ← 服務 B：訪談萃取新工作經歷
     ├── Service_C.md             ← 服務 C：職缺風險解剖與面試訓練
@@ -39,22 +39,23 @@ Claude Web Skill/
 1. 前往 claude.ai → 建立新 Project（或進入現有 Project）
 2. 進入 **Project Settings → Project Instructions**
 3. 開啟 `references/instructions.md`，複製全部內容，貼入 Instructions 欄位
-4. 在 **Project Knowledge** 區塊，逐一上傳以下 8 個文件（可直接從 `references/` 資料夾選取）：
+4. 在 **Project Knowledge** 區塊，逐一上傳以下 9 個文件（可直接從 `references/` 資料夾選取）：
 
    | 順序 | 文件 | 說明 |
    |------|------|------|
-   | 1 | `Service_A.md` | 服務 A 步驟 |
-   | 2 | `Service_B.md` | 服務 B 步驟 |
-   | 3 | `Service_C.md` | 服務 C 步驟 |
-   | 4 | `Service_Interview.md` | STAR 訪談框架 |
-   | 5 | `Avoid_Risk.md` | 台灣職場風險知識庫 |
-   | 6 | `Resume_Template.md` | 履歷格式規範 |
-   | 7 | `Special_Cases.md` | 特殊情境處理 |
-   | 8 | `Few_Shot_Examples.md` | 輸出示範 |
+   | 1 | `Glossary.md` | 全系統術語規範（優先載入） |
+   | 2 | `Service_A.md` | 服務 A 步驟 |
+   | 3 | `Service_B.md` | 服務 B 步驟 |
+   | 4 | `Service_C.md` | 服務 C 步驟 |
+   | 5 | `Service_Interview.md` | STAR 訪談框架 |
+   | 6 | `Avoid_Risk.md` | 台灣職場風險知識庫 |
+   | 7 | `Resume_Template.md` | 履歷格式規範 |
+   | 8 | `Special_Cases.md` | 特殊情境處理 |
+   | 9 | `Few_Shot_Examples.md` | 輸出示範 |
 
 5. 儲存 Project，在 Project 內開始對話即可
 
-> **注意**：`instructions.md` 貼入 Instructions 欄位；其餘 8 個文件上傳至 Knowledge。`Claude_Web_Skill_README.md` 和 `SKILL.md` 為說明/路由文件，不需上傳至 Knowledge。
+> **注意**：`instructions.md` 貼入 Instructions 欄位；其餘 9 個文件上傳至 Knowledge。`SKILL.md` 為 CLI 路由文件，不需上傳至 Knowledge。
 
 ---
 
@@ -97,6 +98,7 @@ cp references/*.md ~/.claude/skills/career-mentor/references/
 ├── SKILL.md
 └── references/
     ├── instructions.md
+    ├── Glossary.md
     ├── Service_A.md
     ├── Service_B.md
     ├── Service_C.md
