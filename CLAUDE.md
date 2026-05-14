@@ -17,8 +17,9 @@ This is a **career mentorship AI assistant knowledge base** written entirely in 
 | `Service_Interview.md` | 4-stage interview methodology (STAR framework) used by Service B |
 | `Avoid_Risk.md` | Taiwan workplace red-flag guide used by Service C for toxic-company detection |
 | `Resume_Template.md` | 8-block resume format specification — governs output structure for Services A and B |
-| `Special_Cases.md` | Non-standard career situation handlers — employment gaps, atypical work, freelancers, etc. |
+| `Special_Cases.md` | Non-standard career situation handlers — employment gaps, atypical work, freelancers, fresh graduates, mid-to-senior-age job seekers (45+), and career-changers (cross-industry/cross-function) |
 | `Few_Shot_Examples.md` | Output examples for all three services — reference for AI response structure and tone |
+| `Glossary.md` | System-wide terminology standard — canonical terms, usage contexts, prohibited variants for all 4 term groups |
 
 ## System Behaviour (from `instructions.md`)
 
@@ -26,21 +27,22 @@ This is a **career mentorship AI assistant knowledge base** written entirely in 
 - **Persona**: Professional career/resume mentor — calm, objective, no emotional encouragement.
 - **Address**: Always use 「您」 for the user.
 - **Out-of-scope refusal**: Respond with `【抱歉，您詢問的問題不在我職能的回答範疇内，請詢問我關於職涯履歷的相關問題。】`
-- **Session flow**: Greet → ask name → present service menu → execute chosen service → offer follow-up or close.
+- **Session flow**: Greet → ask name → ask job-search stage → recommend best service via 求職階段推薦邏輯 table → execute chosen service → offer follow-up or close.
 
 ## Three Services
 
-**A — Resume Review & Optimization**
-Reference files: `Service_A.md`
-Goal: Assess existing resume against career goals; deliver specific improvement feedback; generate an optimized resume.
+**A — Resume Review & Optimization** (7 steps)
+Reference files: `Service_A.md`, `Resume_Template.md`; edge case: `Special_Cases.md`
+Goal: Assess existing resume against career goals; deliver specific improvement feedback; generate an optimized resume. After Chinese resume is confirmed, optionally produce English version.
+Sub-service **A-1 (中翻英)**: if user already has a finalized Chinese resume and needs only English translation, fork at step 2 into A-1 — translate following English resume conventions, confirm, then end.
 
-**B — Guided Interview → New Work Experience**
-Reference files: `Service_B.md`, `Service_Interview.md`
-Goal: Use Socratic interviewing (STAR model) to surface the user's real work contributions, then write polished resume bullets from the transcript.
+**B — Guided Interview → New Work Experience** (7 steps)
+Reference files: `Service_B.md`, `Service_Interview.md`, `Resume_Template.md`; edge case: `Special_Cases.md`; limited: `Avoid_Risk.md` Ch.2 only
+Goal: Use Socratic interviewing (STAR model) to surface the user's real work contributions, then write polished resume bullets from the transcript. Optionally produce a 60-sec oral script or longer outline. If illegal work conditions are mentioned, cite labor law briefly and return to interview flow.
 
-**C — Resume–Job Match + Interview Training**
-Reference files: `Service_C.md`, `Avoid_Risk.md`
-Goal: Analyse fit between resume and target job posting; flag legal/ethical red flags in the posting; prepare the user for expected interview questions and strategic questions to ask the employer.
+**C — Resume–Job Match + Interview Training** (9 steps)
+Reference files: `Service_C.md`, `Avoid_Risk.md` (full), `Service_Interview.md`
+Goal: Analyse fit between resume and target job posting; flag legal/ethical red flags; evaluate trial-assignment reasonableness; prepare the user for expected interview questions and strategic questions to ask the employer.
 
 ## Resume Generation Rules (from `instructions.md`)
 
@@ -66,7 +68,9 @@ Goal: Analyse fit between resume and target job posting; flag legal/ethical red 
 - All files are in Markdown; preserve heading hierarchy and list structure.
 - Keep all content in Traditional Chinese unless adding a structural label that appears only in this CLAUDE.md.
 - When updating a service flow, edit only the relevant `Service_*.md` file; keep `instructions.md` as the single source of truth for persona and global rules.
-- `Avoid_Risk.md` and `Service_Interview.md` are shared reference materials — changes there affect Services B and C respectively.
+- `Avoid_Risk.md` is a shared reference: Service C uses it in full; Service B uses only Ch.2 (illegal work conditions) — changes to other chapters do not affect Service B.
+- `Service_Interview.md` is a shared reference — changes there affect Services B and C.
+- When editing any file, follow canonical terms defined in `Glossary.md`. If you spot a prohibited variant (e.g. "STAR 原則", "職涯經歷"), replace it with the canonical form and note it in the commit.
 
 ---
 
