@@ -129,19 +129,20 @@ cp references/*.md ~/.claude/skills/career-mentor/references/
 
 ## 維護：更新 career-mentor-v1.skill
 
-`career-mentor-v1.skill` 是 9 個 `references/` 模組手動拼接的單一合併文件，每個模組對應一個 SECTION 區塊：
+`career-mentor-v1.skill` 是 10 個 `references/` 模組手動拼接的單一合併文件，每個模組對應一個 SECTION 區塊：
 
 | SECTION | 對應文件 |
 |---------|---------|
 | SECTION 1: INSTRUCTIONS | `references/instructions.md` |
-| SECTION 2: SERVICE_A | `references/Service_A.md` |
-| SECTION 3: SERVICE_B | `references/Service_B.md` |
-| SECTION 4: SERVICE_C | `references/Service_C.md` |
-| SECTION 5: SERVICE_INTERVIEW | `references/Service_Interview.md` |
-| SECTION 6: AVOID_RISK | `references/Avoid_Risk.md` |
-| SECTION 7: RESUME_TEMPLATE | `references/Resume_Template.md` |
-| SECTION 8: SPECIAL_CASES | `references/Special_Cases.md` |
-| SECTION 9: FEW_SHOT_EXAMPLES | `references/Few_Shot_Examples.md` |
+| SECTION 2: GLOSSARY | `references/Glossary.md` |
+| SECTION 3: SERVICE_A | `references/Service_A.md` |
+| SECTION 4: SERVICE_B | `references/Service_B.md` |
+| SECTION 5: SERVICE_C | `references/Service_C.md` |
+| SECTION 6: SERVICE_INTERVIEW | `references/Service_Interview.md` |
+| SECTION 7: AVOID_RISK | `references/Avoid_Risk.md` |
+| SECTION 8: RESUME_TEMPLATE | `references/Resume_Template.md` |
+| SECTION 9: SPECIAL_CASES | `references/Special_Cases.md` |
+| SECTION 10: FEW_SHOT_EXAMPLES | `references/Few_Shot_Examples.md` |
 
 **更新步驟**（任一 `references/` 文件有變更時）：
 1. 開啟 `career-mentor-v1.skill`，找到對應 SECTION 的邊界（`==================================================================`）

@@ -43,20 +43,21 @@ Gemini Gem/
 
 ### 3. 上傳知識庫文件
 
-在 **Knowledge** 欄位，點擊上傳按鈕，依序選取以下 8 個文件（可直接從本資料夾選取）：
+在 **Knowledge** 欄位，點擊上傳按鈕，依序選取以下 9 個文件（可直接從本資料夾選取）：
 
 | 順序 | 文件 | 說明 |
 |------|------|------|
-| 1 | `Service_A.md` | 服務 A 步驟 |
-| 2 | `Service_B.md` | 服務 B 步驟 |
-| 3 | `Service_C.md` | 服務 C 步驟 |
-| 4 | `Service_Interview.md` | STAR 訪談框架 |
-| 5 | `Avoid_Risk.md` | 台灣職場風險知識庫 |
-| 6 | `Resume_Template.md` | 履歷格式規範 |
-| 7 | `Special_Cases.md` | 特殊情境處理 |
-| 8 | `Few_Shot_Examples.md` | 輸出示範 |
+| 1 | `Glossary.md` | 全系統術語規範（優先載入） |
+| 2 | `Service_A.md` | 服務 A 步驟 |
+| 3 | `Service_B.md` | 服務 B 步驟 |
+| 4 | `Service_C.md` | 服務 C 步驟 |
+| 5 | `Service_Interview.md` | STAR 訪談框架 |
+| 6 | `Avoid_Risk.md` | 台灣職場風險知識庫 |
+| 7 | `Resume_Template.md` | 履歷格式規範 |
+| 8 | `Special_Cases.md` | 特殊情境處理 |
+| 9 | `Few_Shot_Examples.md` | 輸出示範 |
 
-> **注意**：`instructions.md` 貼入 Instructions 欄位，**不需要**另外上傳至 Knowledge。`Gemini_Gem_README.md` 和 `UPLOAD_GUIDE.md` 為說明文件，不需上傳。
+> **注意**：`instructions.md` 貼入 Instructions 欄位，**不需要**另外上傳至 Knowledge。本指引文件（`平臺Gemini_GPTs_DEPLOY-GUIDE.md`）為說明文件，不需上傳。
 
 ### 4. 儲存並測試
 
@@ -83,9 +84,9 @@ Gemini Gem/
 
 ### 4. 上傳知識庫文件
 
-在 **Knowledge** 區塊點擊 **Upload files**，依序選取以下 8 個文件（可直接從本資料夾選取）：
+在 **Knowledge** 區塊點擊 **Upload files**，依序選取以下 9 個文件（可直接從本資料夾選取）：
 
-`Service_A.md`、`Service_B.md`、`Service_C.md`、`Service_Interview.md`、`Avoid_Risk.md`、`Resume_Template.md`、`Special_Cases.md`、`Few_Shot_Examples.md`
+`Glossary.md`、`Service_A.md`、`Service_B.md`、`Service_C.md`、`Service_Interview.md`、`Avoid_Risk.md`、`Resume_Template.md`、`Special_Cases.md`、`Few_Shot_Examples.md`
 
 ### 5. 設定功能選項
 

@@ -12,14 +12,15 @@ description: 職涯履歷導師 — 提供三項求職履歷服務：A.履歷檢
 依序載入以下文件（確保路由與依賴關係正確解析）：
 
 1. `references/instructions.md` — 角色定義、全域規則、路由邏輯、對話狀態追蹤
-2. `references/Service_A.md` — 服務 A：履歷檢視與優化生成步驟
-3. `references/Service_B.md` — 服務 B：訪談萃取新工作經歷步驟
-4. `references/Service_C.md` — 服務 C：職缺風險解剖與面試訓練步驟
-5. `references/Service_Interview.md` — STAR 訪談方法論與面試題型框架
-6. `references/Avoid_Risk.md` — 台灣職場風險知識庫（Service C 引用）
-7. `references/Resume_Template.md` — 履歷 8 區塊格式規範（Service A/B 引用）
-8. `references/Special_Cases.md` — 特殊情境處理：空窗期、非典型工作（Service A/B 引用）
-9. `references/Few_Shot_Examples.md` — 三個服務的輸出格式示範（參考用）
+2. `references/Glossary.md` — 全系統術語規範：規範用詞、禁止替代、適用場景（全服務共用）
+3. `references/Service_A.md` — 服務 A：履歷檢視與優化生成步驟
+4. `references/Service_B.md` — 服務 B：訪談萃取新工作經歷步驟
+5. `references/Service_C.md` — 服務 C：職缺風險解剖與面試訓練步驟
+6. `references/Service_Interview.md` — STAR 訪談方法論與面試題型框架
+7. `references/Avoid_Risk.md` — 台灣職場風險知識庫（Service C 引用）
+8. `references/Resume_Template.md` — 履歷 8 區塊格式規範（Service A/B 引用）
+9. `references/Special_Cases.md` — 特殊情境處理：空窗期、非典型工作（Service A/B 引用）
+10. `references/Few_Shot_Examples.md` — 三個服務的輸出格式示範（參考用）
 
 ## 服務路由
 
@@ -51,5 +52,5 @@ description: 職涯履歷導師 — 提供三項求職履歷服務：A.履歷檢
 
 ## 文件版本
 
-v1.1 | 2026-04-29
-依賴文件：`references/` 資料夾內的所有 `.md` 文件（共 9 個）
+v1.2 | 2026-05-14
+依賴文件：`references/` 資料夾內的所有 `.md` 文件（共 10 個）
