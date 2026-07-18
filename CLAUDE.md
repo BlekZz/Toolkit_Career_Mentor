@@ -96,3 +96,16 @@ All other agents in `~/.claude/agents/bench_*/` should be treated as inactive.
 ## Inactive
 All agents not listed above are suppressed for this session.
 If you need an unlisted agent, explicitly name it in your message and reference its bench folder (`bench_agency-agents`).
+
+---
+
+## 知識歸檔路由表
+Wrap-up（session 收尾 / 知識整合）時，project-local insight 依此表歸檔
+（本專案為純知識庫、尚無 `dev/`，目錄於首次歸檔時按需建立）：
+
+| 洞見類型 | 歸檔目標檔案 |
+|----------|--------------|
+| Schema / 事實類知識 | `dev/Reference_<subject>.md` |
+| 已解 bug 的 fix pattern | 相關 Reference/schema 檔；並在 debug log 對應條目打 ✅ |
+| 零散技術筆記、跨 session 除錯脈絡 | `dev/tech-notes.md` |
+| 架構決策（含取捨理由） | `dev/decisions/ADR-NNN-<kebab-name>.md` |
