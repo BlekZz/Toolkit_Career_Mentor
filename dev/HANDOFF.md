@@ -1,0 +1,4 @@
+- updated: 2026-07-19 (claude)
+- 停點: OS-conform 已升版至 2026-07-19.4（C-13/C-14/C-15 delta，N/A+PASS）；README.md 全專案文件與 MainFiles/DEPLOYMENT/SCRIPT repo 重整已完成。
+- 下一步: 待定 — 無明顯下一步紀錄，需向 Blake 確認後續方向。
+- 切入: README.md, CLAUDE.md
