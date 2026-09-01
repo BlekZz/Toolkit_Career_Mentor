@@ -1,121 +1,77 @@
-# 職涯履歷導師 — Claude Web Skill 部署指南
+# 職涯履歷導師 — Claude Web (claude.ai) 部署指南
 
-版本：v1.2 | 日期：2026-05-14
-
-## 套件概述
-
-本套件包含「職涯履歷導師」AI 技能的完整部署文件，支援多種 Claude 平台。
-所有文件均為獨立自足，無需連接原始專案目錄即可部署。
+版本:v2.0 | 日期:2026-09-02
+變更:claude.ai 已原生支援 Skills 上傳(ZIP),取代舊版「貼入 Project Instructions」作法;舊方式降級為備援。部署事實依據見 `dev/Reference_skill_modernization.md` §5。
 
 ---
 
-## 套件文件結構
+## 方式 A:claude.ai 原生 Skills 上傳(推薦)
 
+claude.ai 現已支援與 Claude Code 相同格式的 Agent Skills(SKILL.md + 附屬文件),按需載入、跨所有對話與 Project 生效。這是 GPTs/Gems 的直接替代形態。
+
+### 打包規則
+
+- ZIP 檔的**根部必須是 skill 資料夾本身**(資料夾名 = `career-mentor`,與 frontmatter `name` 一致),不是散檔在根部
+- 資料夾內必含 `SKILL.md`,附屬文件放 `references/`
+- 解壓後總大小 <30MB(本套件約 150KB,毫無壓力)
+- frontmatter 只能用 spec 交集欄位(`name`/`description`/`license`/`compatibility`/`metadata`/`allowed-tools`);spec 外欄位會導致**上傳被拒**
+- `description` 保守控制在 200 字元內(claude.ai 支援文章的上限;spec 為 1024)
+
+### 打包指令(PowerShell)
+
+```powershell
+# 於 DEPLOYMENT/Claude_Web/ 下執行
+Copy-Item output career-mentor -Recurse
+Compress-Archive -Path career-mentor -DestinationPath career-mentor.zip -Force
+Remove-Item career-mentor -Recurse
 ```
-Claude Web Skill/
-├── SKILL.md                     ← 多文件技能路由入口（Claude Code CLI 安裝用）
-├── career-mentor-v1.skill       ← 合併版單一文件（Claude.ai 快速貼上用）
-└── references/                  ← 知識庫文件（可直接從此資料夾選取上傳）
-    ├── instructions.md          ← System Prompt — 角色、規則、路由
-    ├── Glossary.md              ← 全系統術語規範
-    ├── Service_A.md             ← 服務 A：履歷檢視與優化生成
-    ├── Service_B.md             ← 服務 B：訪談萃取新工作經歷
-    ├── Service_C.md             ← 服務 C：職缺風險解剖與面試訓練
-    ├── Service_Interview.md     ← STAR 訪談方法論與面試題型框架
-    ├── Avoid_Risk.md            ← 台灣職場風險知識庫
-    ├── Resume_Template.md       ← 履歷 8 區塊格式規範
-    ├── Special_Cases.md         ← 特殊情境處理（空窗期、非典型工作）
-    └── Few_Shot_Examples.md     ← 三個服務的輸出示範
-```
+
+### 上傳步驟
+
+1. claude.ai → **Settings → Skills**(需已啟用 code execution / file creation 能力)
+2. **Create skill → Upload a skill** → 選取 `career-mentor.zip`
+3. 上傳後在 Skills 清單將其 toggle 為啟用
+4. 任一對話中提及履歷/職涯需求即自動觸發,或直接說「使用 career-mentor」
+
+### 已知限制
+
+- 自訂 skill **僅上傳者本人可見**(Enterprise 方案才有組織共享);要分享給他人,把 ZIP 檔傳給對方各自上傳
+- skill 本體不跨平台同步:claude.ai 與 Claude Code 各自持有一份,更新時兩邊都要重新部署
 
 ---
 
-## 方式 A：Claude.ai Project + 多文件知識庫（推薦）
+## 方式 B:Claude.ai Project 疊用(選用)
 
-最完整的部署方式，各文件獨立管理，更新單一文件時只需重新上傳對應文件。
+Skills 與 Projects 可以疊用。若想要一個「開場即進入導師 persona」的固定入口:
 
-### 部署步驟
+1. 建立 Project,Instructions 只放 **persona 精簡版**(角色、語氣、繁體中文、「您」稱謂)+ 一句「處理職涯履歷需求時使用 career-mentor skill」
+2. 知識庫文件**不需**上傳至 Project Knowledge——skill 的 `references/` 已按需載入
 
-1. 前往 claude.ai → 建立新 Project（或進入現有 Project）
-2. 進入 **Project Settings → Project Instructions**
-3. 開啟 `references/instructions.md`，複製全部內容，貼入 Instructions 欄位
-4. 在 **Project Knowledge** 區塊，逐一上傳以下 9 個文件（可直接從 `references/` 資料夾選取）：
-
-   | 順序 | 文件 | 說明 |
-   |------|------|------|
-   | 1 | `Glossary.md` | 全系統術語規範（優先載入） |
-   | 2 | `Service_A.md` | 服務 A 步驟 |
-   | 3 | `Service_B.md` | 服務 B 步驟 |
-   | 4 | `Service_C.md` | 服務 C 步驟 |
-   | 5 | `Service_Interview.md` | STAR 訪談框架 |
-   | 6 | `Avoid_Risk.md` | 台灣職場風險知識庫 |
-   | 7 | `Resume_Template.md` | 履歷格式規範 |
-   | 8 | `Special_Cases.md` | 特殊情境處理 |
-   | 9 | `Few_Shot_Examples.md` | 輸出示範 |
-
-5. 儲存 Project，在 Project 內開始對話即可
-
-> **注意**：`instructions.md` 貼入 Instructions 欄位；其餘 9 個文件上傳至 Knowledge。`SKILL.md` 為 CLI 路由文件，不需上傳至 Knowledge。
+> 舊版「instructions.md 貼入 Instructions + 9 檔上傳 Knowledge」的全量做法已淘汰:Project Knowledge 是常駐載入,會稀釋注意力且無法按服務分支載入。
 
 ---
 
-## 方式 B：Claude.ai 快速貼上（單一合併文件）
+## 方式 C:無 Skills 權限時的備援(貼上法,舊方式)
 
-適合快速部署或不想管理多個文件的使用場景。
+僅在帳號無法使用 Skills 功能時使用:開啟 `career-mentor-v1.skill`(10 個模組的合併單檔),貼入新對話首則訊息,輸入「開始」啟動。
 
-### 部署步驟（作為 Project Instructions）
-
-1. 開啟 `career-mentor-v1.skill`，複製全部內容
-2. 建立新 Claude Project → Project Settings → Project Instructions → 貼入並儲存
-3. 在 Project 內開始對話即可
-
-### 部署步驟（作為對話首則訊息）
-
-1. 開啟 `career-mentor-v1.skill`，複製全部內容
-2. 貼入新對話的第一則訊息，發送後輸入「開始」啟動服務
+> ⚠ 此檔為手動拼接的合併版,與 `references/` 的同步依賴人工維護(SECTION 邊界為 `====…` 分隔線)。採用方式 A 後不再需要維護此檔;若長期不用建議標記 deprecated。
 
 ---
 
-## 方式 C：Claude Code CLI 技能安裝
+## Claude Code CLI 安裝(主要形態)
 
-安裝為 Claude Code 斜線指令技能，使用 `/career-mentor` 呼叫。
+```powershell
+# 專案級安裝(建議)
+Copy-Item SKILL.md <project>\.claude\skills\career-mentor\
+Copy-Item references <project>\.claude\skills\career-mentor\references -Recurse
 
-### 部署步驟
-
-```bash
-# 1. 建立技能目錄
-mkdir -p ~/.claude/skills/career-mentor/references
-
-# 2. 複製技能文件
-cp SKILL.md ~/.claude/skills/career-mentor/
-cp references/*.md ~/.claude/skills/career-mentor/references/
+# 或全域安裝
+Copy-Item SKILL.md ~\.claude\skills\career-mentor\
+Copy-Item references ~\.claude\skills\career-mentor\references -Recurse
 ```
 
-### 安裝後目錄結構
-
-```
-~/.claude/skills/career-mentor/
-├── SKILL.md
-└── references/
-    ├── instructions.md
-    ├── Glossary.md
-    ├── Service_A.md
-    ├── Service_B.md
-    ├── Service_C.md
-    ├── Service_Interview.md
-    ├── Avoid_Risk.md
-    ├── Resume_Template.md
-    ├── Special_Cases.md
-    └── Few_Shot_Examples.md
-```
-
-### 使用方式
-
-在 Claude Code 中輸入：
-
-```
-/career-mentor
-```
+使用:`/career-mentor`,或對話中提及履歷/職涯需求時自動觸發。
 
 ---
 
@@ -123,39 +79,14 @@ cp references/*.md ~/.claude/skills/career-mentor/references/
 
 | 服務 | 說明 |
 |------|------|
-| A — 履歷檢視 + 優化 + 生成 | 分析現有履歷，提供結構化回饋，生成優化版本 |
-| B — 訪談萃取 + 新工作經歷 | 透過 STAR 訪談挖掘工作亮點，轉化為履歷條目 |
-| C — 職缺風險解剖 + 面試準備 | 分析職缺說明，評估履歷匹配程度，準備面試問答 |
+| A — 履歷檢視 + 優化 + 生成 | 分析現有履歷,提供結構化回饋,生成優化版本 |
+| B — 訪談萃取 + 新工作經歷 | 透過 STAR 訪談挖掘工作亮點,轉化為履歷條目 |
+| C — 職缺風險解剖 + 面試準備 | 分析職缺說明,評估履歷匹配程度,準備面試問答 |
 
 ---
 
-## 維護：更新 career-mentor-v1.skill
+## 待辦(skill v2 重寫)
 
-`career-mentor-v1.skill` 是 10 個 `references/` 模組手動拼接的單一合併文件，每個模組對應一個 SECTION 區塊：
-
-| SECTION | 對應文件 |
-|---------|---------|
-| SECTION 1: INSTRUCTIONS | `references/instructions.md` |
-| SECTION 2: GLOSSARY | `references/Glossary.md` |
-| SECTION 3: SERVICE_A | `references/Service_A.md` |
-| SECTION 4: SERVICE_B | `references/Service_B.md` |
-| SECTION 5: SERVICE_C | `references/Service_C.md` |
-| SECTION 6: SERVICE_INTERVIEW | `references/Service_Interview.md` |
-| SECTION 7: AVOID_RISK | `references/Avoid_Risk.md` |
-| SECTION 8: RESUME_TEMPLATE | `references/Resume_Template.md` |
-| SECTION 9: SPECIAL_CASES | `references/Special_Cases.md` |
-| SECTION 10: FEW_SHOT_EXAMPLES | `references/Few_Shot_Examples.md` |
-
-**更新步驟**（任一 `references/` 文件有變更時）：
-1. 開啟 `career-mentor-v1.skill`，找到對應 SECTION 的邊界（`==================================================================`）
-2. 將 SECTION 標題行下方的全部內容替換為更新後的 `references/` 文件內容
-3. 確認下一個 SECTION 的 `==================================================================` 分隔線仍完整保留
-
-> **注意**：每次 `references/` 有更新，若使用方式 B（快速貼上）部署，必須同步更新 `career-mentor-v1.skill`，否則兩者內容將不同步。
-
----
-
-## 注意事項
-
-- 所有對話均以繁體中文進行
-- 建議使用 Claude Sonnet 4.6 或更高版本以確保最佳表現
+本指南描述的是**部署機制**的現況;skill 內容本身(SKILL.md 全量載入設計)尚待依 `dev/Reference_skill_modernization.md` 重寫為 progressive-disclosure v2。重寫完成後:
+- `output/SKILL.md` 換新版,`references/` 結構同步調整(examples 拆三檔等)
+- 本指南的打包/上傳步驟不變
