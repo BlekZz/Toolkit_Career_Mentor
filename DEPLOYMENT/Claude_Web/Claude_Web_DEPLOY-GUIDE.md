@@ -17,13 +17,11 @@ claude.ai 現已支援與 Claude Code 相同格式的 Agent Skills(SKILL.md + �
 - frontmatter 只能用 spec 交集欄位(`name`/`description`/`license`/`compatibility`/`metadata`/`allowed-tools`);spec 外欄位會導致**上傳被拒**
 - `description` 保守控制在 200 字元內(claude.ai 支援文章的上限;spec 為 1024)
 
-### 打包指令(PowerShell)
+### 打包指令
 
 ```powershell
-# 於 DEPLOYMENT/Claude_Web/ 下執行
-Copy-Item output career-mentor -Recurse
-Compress-Archive -Path career-mentor -DestinationPath career-mentor.zip -Force
-Remove-Item career-mentor -Recurse
+# 於專案根執行——重建 output/ 並產出 career-mentor.zip
+& .\SCRIPT\deploy_claude_web.ps1
 ```
 
 ### 上傳步驟
@@ -48,14 +46,6 @@ Skills 與 Projects 可以疊用。若想要一個「開場即進入導師 perso
 2. 知識庫文件**不需**上傳至 Project Knowledge——skill 的 `references/` 已按需載入
 
 > 舊版「instructions.md 貼入 Instructions + 9 檔上傳 Knowledge」的全量做法已淘汰:Project Knowledge 是常駐載入,會稀釋注意力且無法按服務分支載入。
-
----
-
-## 方式 C:無 Skills 權限時的備援(貼上法,舊方式)
-
-僅在帳號無法使用 Skills 功能時使用:開啟 `career-mentor-v1.skill`(10 個模組的合併單檔),貼入新對話首則訊息,輸入「開始」啟動。
-
-> ⚠ 此檔為手動拼接的合併版,與 `references/` 的同步依賴人工維護(SECTION 邊界為 `====…` 分隔線)。採用方式 A 後不再需要維護此檔;若長期不用建議標記 deprecated。
 
 ---
 
@@ -85,8 +75,7 @@ Copy-Item references ~\.claude\skills\career-mentor\references -Recurse
 
 ---
 
-## 待辦(skill v2 重寫)
+## 版本沿革
 
-本指南描述的是**部署機制**的現況;skill 內容本身(SKILL.md 全量載入設計)尚待依 `dev/Reference_skill_modernization.md` 重寫為 progressive-disclosure v2。重寫完成後:
-- `output/SKILL.md` 換新版,`references/` 結構同步調整(examples 拆三檔等)
-- 本指南的打包/上傳步驟不變
+- v2.0(2026-09-02):skill 內容依 `dev/Reference_skill_modernization.md` 重寫為 progressive-disclosure v2;部署改走 claude.ai 原生 Skills ZIP 上傳;汰除 `career-mentor-v1.skill` 合併檔與 per-platform SKILL.md(源統一為 `MainFiles/SKILL.md`)。
+- v1.2(2026-05-14):GPTs/Gems 時代設計,Project Instructions 貼上法。

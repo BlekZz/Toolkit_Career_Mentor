@@ -8,17 +8,20 @@ This is a **career mentorship AI assistant knowledge base** written entirely in 
 
 ## File Map
 
+All knowledge-base files live in `MainFiles/`. Since skill v2 (2026-09, progressive disclosure — see `dev/Reference_skill_modernization.md`), `SKILL.md` is the always-loaded entry point and everything else is loaded on demand.
+
 | File | Role |
 |------|------|
-| `instructions.md` | Master system prompt — persona, tone rules, conversation flow, service menu, resume generation principles, and resume content blocks |
+| `SKILL.md` | Skill entry point (always loaded) — persona, global discipline, multi-turn hard-stop rule, state checklist, service routing table, fast-track opening, conditional loading triggers |
+| `instructions.md` | On-demand global reference — job-stage recommendation logic, service detail descriptions, state-tracking details, edge cases, service chaining, 12 resume generation principles |
 | `Service_A.md` | Step-by-step flow for Service A (resume review + optimization + generation) |
 | `Service_B.md` | Step-by-step flow for Service B (guided interview → craft new work experience) |
 | `Service_C.md` | Step-by-step flow for Service C (resume–job match analysis + interview prep) |
-| `Service_Interview.md` | 4-stage interview methodology (STAR framework) used by Service B |
+| `Service_Interview.md` | 4-stage interview methodology (STAR framework) used by Service B; sole authority for interview-discipline hard rules (one question per turn, stop-and-wait, stage approval gates) |
 | `Avoid_Risk.md` | Taiwan workplace red-flag guide used by Service C for toxic-company detection |
-| `Resume_Template.md` | 8-block resume format specification — governs output structure for Services A and B |
+| `Resume_Template.md` | Sole authority for the 8 resume content blocks + format specification — governs output structure for Services A and B |
 | `Special_Cases.md` | Non-standard career situation handlers — employment gaps, atypical work, freelancers, fresh graduates, mid-to-senior-age job seekers (45+), and career-changers (cross-industry/cross-function) |
-| `Few_Shot_Examples.md` | Output examples for all three services — reference for AI response structure and tone |
+| `Examples_A.md` / `Examples_B.md` / `Examples_C.md` | Per-service output examples (2-3 strongest input/output pairs each) — read before generating that service's deliverables |
 | `Glossary.md` | System-wide terminology standard — canonical terms, usage contexts, prohibited variants for all 4 term groups |
 
 ## System Behaviour (from `instructions.md`)
@@ -67,7 +70,8 @@ Goal: Analyse fit between resume and target job posting; flag legal/ethical red 
 
 - All files are in Markdown; preserve heading hierarchy and list structure.
 - Keep all content in Traditional Chinese unless adding a structural label that appears only in this CLAUDE.md.
-- When updating a service flow, edit only the relevant `Service_*.md` file; keep `instructions.md` as the single source of truth for persona and global rules.
+- When updating a service flow, edit only the relevant `Service_*.md` file. `SKILL.md` is the single source of truth for persona and always-on global rules; `instructions.md` holds on-demand global details. Keep them zero-overlap (SSOT) and update the SYSTEM INDEX table at the top of `instructions.md` when file dependencies change.
+- After any `MainFiles/*.md` change, regenerate deployment outputs: `SCRIPT\deploy_claude_code.ps1` and `SCRIPT\deploy_claude_web.ps1`.
 - `Avoid_Risk.md` is a shared reference: Service C uses it in full; Service B uses only Ch.2 (illegal work conditions) — changes to other chapters do not affect Service B.
 - `Service_Interview.md` is a shared reference — changes there affect Services B and C.
 - When editing any file, follow canonical terms defined in `Glossary.md`. If you spot a prohibited variant (e.g. "STAR 原則", "職涯經歷"), replace it with the canonical form and note it in the commit.
